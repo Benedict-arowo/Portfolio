@@ -226,10 +226,10 @@ const projectsData: Record<string, ProjectDetails> = {
 		language: "TypeScript",
 		lastUpdated: "2024-02-18",
 	},
-	"marketplace-remake": {
-		name: "marketplace-remake",
+	marketplace: {
+		name: "marketplace",
 		emoji: "🛍️",
-		title: "Marketplace Remake",
+		title: "Marketplace",
 		description: "A feature-rich student marketplace with improved UI.",
 		longDescription:
 			"A refined version of the student marketplace app, offering better UI/UX, real-time messaging, and enhanced search and filtering options. Designed for a smooth and secure buying and selling experience.",
