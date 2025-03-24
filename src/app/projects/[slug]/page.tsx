@@ -9,6 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useParams } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import Image from "next/image";
 
 type ProjectDetails = {
 	name: string;
@@ -519,7 +520,9 @@ export default function ProjectPage() {
 							{/* Project Images */}
 							<div className="relative rounded-lg overflow-hidden bg-zinc-900 mb-6">
 								<div className="aspect-video">
-									<img
+									<Image
+										width={100}
+										height={100}
 										src={
 											project.images[activeImageIndex] ||
 											"/placeholder.svg"
@@ -544,10 +547,12 @@ export default function ProjectPage() {
 													? "border-primary"
 													: "border-transparent"
 											}`}>
-											<img
+											<Image
 												src={
 													image || "/placeholder.svg"
 												}
+												width={100}
+												height={100}
 												alt={`${
 													project.title
 												} thumbnail ${index + 1}`}
