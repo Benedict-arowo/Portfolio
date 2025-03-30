@@ -88,8 +88,7 @@ export default function Portfolio() {
 					</div>
 
 					<p className="mt-8 text-zinc-300">
-						🎓 First-year Electrical & Electronics Engineering
-						student at{" "}
+						🎓 Electrical & Electronics Engineering student at{" "}
 						<Link
 							href={"https://achievers.edu.ng/"}
 							className="underline">
@@ -151,6 +150,73 @@ export default function Portfolio() {
 				</div>
 			</section>
 
+			{/* Work Experience */}
+			<section className="projects container mx-auto px-4 py-20">
+				<motion.div
+					initial={{ opacity: 0 }}
+					whileInView={{ opacity: 1 }}
+					transition={{ duration: 0.5 }}
+					viewport={{ once: true }}
+					className="mb-12">
+					<h2 className="text-3xl font-bold md:text-4xl">
+						Work Experience
+					</h2>
+					<div className="mt-2 h-1 w-20 bg-primary"></div>
+				</motion.div>
+
+				<div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+					{projects
+						.filter((project) => project.work_experience)
+						.map((project, index) => (
+							<motion.div
+								key={index}
+								initial={{ opacity: 0, y: 20 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								transition={{
+									duration: 0.5,
+									delay: index * 0.1,
+								}}
+								viewport={{ once: true }}
+								className="group">
+								<Card className="overflow-hidden rounded-lg border-zinc-800 bg-zinc-900 hover:border-primary/50 transition-all h-full">
+									<CardContent className="p-6">
+										<div className="flex items-center gap-2 mb-3">
+											<span
+												className="text-2xl"
+												aria-hidden="true">
+												{project.emoji}
+											</span>
+											<h3 className="text-xl font-bold">
+												{project.title}
+											</h3>
+										</div>
+										<p className="mb-6 text-zinc-400">
+											{project.description}
+										</p>
+										<div className="flex flex-wrap gap-2 mb-6">
+											{project.technologies.map(
+												(tech, techIndex) => (
+													<span
+														key={techIndex}
+														className="rounded-full bg-zinc-800 px-3 py-1 text-xs text-zinc-300">
+														{tech}
+													</span>
+												)
+											)}
+										</div>
+										<Link
+											href={`/projects/${project.name}`}
+											className="text-primary hover:underline inline-flex items-center">
+											View More{" "}
+											<ArrowRight className="ml-1 h-4 w-4" />
+										</Link>
+									</CardContent>
+								</Card>
+							</motion.div>
+						))}
+				</div>
+			</section>
+
 			{/* Featured Projects */}
 			<section className="projects container mx-auto px-4 py-20">
 				<motion.div
@@ -166,50 +232,55 @@ export default function Portfolio() {
 				</motion.div>
 
 				<div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-					{projects.map((project, index) => (
-						<motion.div
-							key={index}
-							initial={{ opacity: 0, y: 20 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.5, delay: index * 0.1 }}
-							viewport={{ once: true }}
-							className="group">
-							<Card className="overflow-hidden rounded-lg border-zinc-800 bg-zinc-900 hover:border-primary/50 transition-all h-full">
-								<CardContent className="p-6">
-									<div className="flex items-center gap-2 mb-3">
-										<span
-											className="text-2xl"
-											aria-hidden="true">
-											{project.emoji}
-										</span>
-										<h3 className="text-xl font-bold">
-											{project.title}
-										</h3>
-									</div>
-									<p className="mb-6 text-zinc-400">
-										{project.description}
-									</p>
-									<div className="flex flex-wrap gap-2 mb-6">
-										{project.technologies.map(
-											(tech, techIndex) => (
-												<span
-													key={techIndex}
-													className="rounded-full bg-zinc-800 px-3 py-1 text-xs text-zinc-300">
-													{tech}
-												</span>
-											)
-										)}
-									</div>
-									<Link
-										href={`/projects/${project.name}`}
-										className="text-primary hover:underline inline-flex items-center">
-										View More{" "}
-										<ArrowRight className="ml-1 h-4 w-4" />
-									</Link>
-								</CardContent>
-							</Card>
-						</motion.div>
-					))}
+					{projects
+						.filter((project) => !project.work_experience)
+						.map((project, index) => (
+							<motion.div
+								key={index}
+								initial={{ opacity: 0, y: 20 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								transition={{
+									duration: 0.5,
+									delay: index * 0.1,
+								}}
+								viewport={{ once: true }}
+								className="group">
+								<Card className="overflow-hidden rounded-lg border-zinc-800 bg-zinc-900 hover:border-primary/50 transition-all h-full">
+									<CardContent className="p-6">
+										<div className="flex items-center gap-2 mb-3">
+											<span
+												className="text-2xl"
+												aria-hidden="true">
+												{project.emoji}
+											</span>
+											<h3 className="text-xl font-bold">
+												{project.title}
+											</h3>
+										</div>
+										<p className="mb-6 text-zinc-400">
+											{project.description}
+										</p>
+										<div className="flex flex-wrap gap-2 mb-6">
+											{project.technologies.map(
+												(tech, techIndex) => (
+													<span
+														key={techIndex}
+														className="rounded-full bg-zinc-800 px-3 py-1 text-xs text-zinc-300">
+														{tech}
+													</span>
+												)
+											)}
+										</div>
+										<Link
+											href={`/projects/${project.name}`}
+											className="text-primary hover:underline inline-flex items-center">
+											View More{" "}
+											<ArrowRight className="ml-1 h-4 w-4" />
+										</Link>
+									</CardContent>
+								</Card>
+							</motion.div>
+						))}
 				</div>
 
 				<div className="mt-12 text-center">
@@ -356,6 +427,7 @@ const projects = [
 		name: "password-manager",
 		title: "Password Manager App",
 		emoji: "🔥",
+		work_experience: false,
 		description:
 			"A secure password manager for storing and managing credentials with end-to-end encryption.",
 		technologies: ["React", "Node.js", "Express", "MongoDB", "Crypto"],
@@ -365,6 +437,7 @@ const projects = [
 		name: "crystal-wheels",
 		title: "Crystal Wheels",
 		emoji: "🚗",
+		work_experience: true,
 		description:
 			"A vehicle rental system built for seamless bookings and management with real-time availability.",
 		technologies: [
@@ -378,17 +451,30 @@ const projects = [
 	},
 	{
 		name: "marketplace",
-		title: "Marketplace Remake",
+		title: "Marketplace",
 		emoji: "🛍️",
+		work_experience: false,
 		description:
-			"A refined, feature-rich version of my student marketplace app with improved UI and functionality.",
-		technologies: ["React", "Firebase", "Redux", "Styled Components"],
+			"A refined version of the jumia marketplace website, offering better UI/UX, real-time messaging, and enhanced search and filtering options. Designed for a smooth and secure buying and selling experience.",
+		technologies: [
+			"React",
+			"NodeJS",
+			"ExpressJS",
+			"Context API",
+			"ShadCN",
+			"Prisma",
+			"Postgres",
+			"Cloudinary",
+			"Web Socket",
+			"Typescript",
+		],
 		githubUrl: "https://github.com/benedictarowo/marketplace-remake",
 	},
 	{
 		name: "blackpoint",
 		title: "BlackPoint",
 		emoji: "🔑",
+		work_experience: true,
 		description:
 			"A security-focused system with advanced authentication mechanisms and role-based access control.",
 		technologies: ["Node.js", "Express", "JWT", "MongoDB", "React"],
@@ -398,6 +484,7 @@ const projects = [
 		name: "scissor",
 		title: "Scissor",
 		emoji: "✂️",
+		work_experience: false,
 		description:
 			"A URL-shortening platform with analytics and user management. Capstone project with comprehensive features.",
 		technologies: [
@@ -413,6 +500,7 @@ const projects = [
 		name: "opeyemi-ai",
 		title: "Opeyemi AI",
 		emoji: "📢",
+		work_experience: true,
 		description:
 			"An affiliate marketing system with automated commission tracking and payment processing.",
 		technologies: ["React", "Node.js", "MongoDB", "Express", "Stripe"],
@@ -422,9 +510,20 @@ const projects = [
 		name: "university-result-checker",
 		title: "University Result Checker",
 		emoji: "🏫",
+		work_experience: false,
 		description:
 			"Helping develop a university result-checking system to streamline student performance tracking.",
 		technologies: ["PHP", "MySQL", "JavaScript", "Bootstrap", "jQuery"],
 		githubUrl: "https://github.com/benedictarowo/result-checker",
+	},
+	{
+		name: "student-test-recovery",
+		title: "Student Test Recovery System",
+		emoji: "📜",
+		work_experience: true,
+		description:
+			"A Python-based solution that matched student phone numbers to identities, saving 1,000+ students from retaking a test.",
+		technologies: ["Python", "Pandas", "Google Forms API"],
+		githubUrl: "https://github.com/benedictarowo/student-test-recovery",
 	},
 ];
