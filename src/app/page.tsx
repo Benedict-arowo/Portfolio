@@ -429,8 +429,8 @@ const projects = [
 		emoji: "🔥",
 		work_experience: false,
 		description:
-			"A secure password manager for storing and managing credentials with end-to-end encryption.",
-		technologies: ["React", "Node.js", "Express", "MongoDB", "Crypto"],
+			"A secure password manager for storing and managing credentials with encryption.",
+		technologies: ["Python", "Django", "Crypto"],
 		githubUrl: "https://github.com/benedictarowo/password-manager",
 	},
 	{
