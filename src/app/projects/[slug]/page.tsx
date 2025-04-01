@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowLeft, Github, ExternalLink, Star, GitFork } from "lucide-react";
+import { ArrowLeft, Github, ExternalLink} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -10,302 +10,7 @@ import { useParams } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
-
-type ProjectDetails = {
-	name: string;
-	emoji: string;
-	title: string;
-	description: string;
-	longDescription: string;
-	features: string[];
-	challenges: string[];
-	technologies: string[];
-	githubUrl: string;
-	liveUrl: string | null;
-	images: string[];
-	stargazers_count: number;
-	forks_count: number;
-	language: string;
-	lastUpdated: string;
-};
-
-// Mock project details data - in a real app, you would fetch this from an API or CMS
-// const projectsData: Record<string, ProjectDetails> = {
-//   "opeyemi-ai": {
-//     name: "opeyemi-ai",
-//     emoji: "⚡",
-//     title: "Opeyemi AI",
-//     description: "Affiliate marketing system with automated commissions.",
-//     longDescription:
-//       "Opeyemi AI is an advanced affiliate marketing platform that automates the commission tracking and payment process. It uses AI to optimize affiliate matching with products and analyzes user behavior to increase conversion rates.",
-//     features: [
-//       "Automated commission calculation and distribution",
-//       "Real-time analytics dashboard for affiliates and merchants",
-//       "AI-powered product matching for affiliates",
-//       "Multi-tier commission structure",
-//       "Integrated payment processing system",
-//     ],
-//     challenges: [
-//       "Building a scalable system that could handle thousands of transactions per minute",
-//       "Implementing secure payment processing with fraud detection",
-//       "Creating an algorithm for fair commission distribution in multi-tier structures",
-//       "Optimizing database queries for real-time analytics",
-//     ],
-//     technologies: ["Next.js", "TypeScript", "PostgreSQL", "Redis", "Docker", "AWS", "Stripe API", "TensorFlow"],
-//     githubUrl: "https://github.com/benedictarowo/opeyemi-ai",
-//     liveUrl: "https://opeyemi-ai.example.com",
-//     images: ["/placeholder.svg?height=600&width=800", "/placeholder.svg?height=600&width=800"],
-//     stargazers_count: 85,
-//     forks_count: 23,
-//     language: "TypeScript",
-//     lastUpdated: "2023-12-15",
-//   },
-//   "marketplace-app": {
-//     name: "marketplace-app",
-//     emoji: "🛍️",
-//     title: "Marketplace App",
-//     description: "Connecting buyers and sellers with real-time messaging.",
-//     longDescription:
-//       "A comprehensive marketplace platform that facilitates transactions between buyers and sellers. Features include product listings, search and filter functionality, secure payment processing, and a real-time messaging system for negotiations.",
-//     features: [
-//       "User authentication and profile management",
-//       "Product listing with multiple images and categories",
-//       "Advanced search and filter options",
-//       "Real-time messaging between buyers and sellers",
-//       "Secure payment processing",
-//       "Rating and review system",
-//     ],
-//     challenges: [
-//       "Implementing a scalable real-time messaging system",
-//       "Building a search algorithm that delivers relevant results quickly",
-//       "Creating a secure escrow payment system",
-//       "Optimizing image loading and storage",
-//     ],
-//     technologies: ["React", "Node.js", "Express", "MongoDB", "Socket.io", "AWS S3", "Cloudinary", "Stripe"],
-//     githubUrl: "https://github.com/benedictarowo/marketplace-app",
-//     liveUrl: "https://marketplace-app.example.com",
-//     images: ["/placeholder.svg?height=600&width=800", "/placeholder.svg?height=600&width=800"],
-//     stargazers_count: 62,
-//     forks_count: 18,
-//     language: "JavaScript",
-//     lastUpdated: "2023-11-28",
-//   },
-//   "auth-system": {
-//     name: "auth-system",
-//     emoji: "🔐",
-//     title: "Auth System",
-//     description: "Secure authentication with JWT and OAuth.",
-//     longDescription:
-//       "A robust authentication system that provides secure user authentication through multiple methods including email/password, OAuth providers, and two-factor authentication. The system is designed to be easily integrated into any web application.",
-//     features: [
-//       "Email and password authentication",
-//       "OAuth integration (Google, GitHub, Facebook)",
-//       "Two-factor authentication",
-//       "Password reset functionality",
-//       "Role-based access control",
-//       "Session management",
-//       "Brute force protection",
-//     ],
-//     challenges: [
-//       "Implementing secure token storage and transmission",
-//       "Building a flexible role-based access control system",
-//       "Creating a seamless OAuth integration experience",
-//       "Developing a robust two-factor authentication flow",
-//     ],
-//     technologies: ["Node.js", "Express", "MongoDB", "JWT", "Passport.js", "Redis", "Nodemailer", "Twilio API"],
-//     githubUrl: "https://github.com/benedictarowo/auth-system",
-//     liveUrl: null,
-//     images: ["/placeholder.svg?height=600&width=800", "/placeholder.svg?height=600&width=800"],
-//     stargazers_count: 41,
-//     forks_count: 12,
-//     language: "JavaScript",
-//     lastUpdated: "2023-10-05",
-//   },
-//   "crypto-exchange": {
-//     name: "crypto-exchange",
-//     emoji: "💸",
-//     title: "Crypto Exchange",
-//     description: "Real-time crypto-to-fiat conversion with custodial wallets.",
-//     longDescription:
-//       "A cryptocurrency exchange platform that allows users to buy, sell, and trade cryptocurrencies with fiat currencies. The platform includes custodial wallets for secure storage and implements real-time price tracking and order matching.",
-//     features: [
-//       "Real-time cryptocurrency price tracking",
-//       "Secure custodial wallets for multiple cryptocurrencies",
-//       "Order book and matching engine",
-//       "Fiat on/off ramps",
-//       "Trading history and portfolio analysis",
-//       "Advanced security features including cold storage",
-//     ],
-//     challenges: [
-//       "Building a high-performance order matching engine",
-//       "Implementing secure wallet management with cold storage",
-//       "Creating a real-time price tracking system",
-//       "Developing comprehensive security measures to prevent attacks",
-//     ],
-//     technologies: [
-//       "React",
-//       "Redux",
-//       "Node.js",
-//       "PostgreSQL",
-//       "Redis",
-//       "WebSockets",
-//       "Docker",
-//       "Kubernetes",
-//       "Blockchain APIs",
-//     ],
-//     githubUrl: "https://github.com/benedictarowo/crypto-exchange",
-//     liveUrl: "https://crypto-exchange.example.com",
-//     images: ["/placeholder.svg?height=600&width=800", "/placeholder.svg?height=600&width=800"],
-//     stargazers_count: 73,
-//     forks_count: 29,
-//     language: "JavaScript",
-//     lastUpdated: "2024-01-22",
-//   },
-// }
-const projectsData: Record<string, ProjectDetails> = {
-	"password-manager": {
-		name: "password-manager",
-		emoji: "🔥",
-		title: "Password Manager App",
-		description:
-			"A secure password manager built as a CS50 Web Capstone project with end-to-end encryption.",
-		longDescription:
-			"A highly secure password manager web application built with Django, HTML, JavaScript, and Tailwind CSS. It allows users to create accounts, manage credentials within folders, and encrypt sensitive data (passwords and hints) using Fernet. The app leverages dynamic JavaScript enhancements for a responsive, mobile-friendly experience.",
-		features: [
-			"Account registration and login with encrypted password hints",
-			"Folder and credential management with dynamic UI",
-			"End-to-end encryption of stored data using Fernet",
-			"Secure password generation and copy-to-clipboard functionality",
-			"Responsive design with mobile-friendly JavaScript enhancements",
-		],
-		challenges: [
-			"Implementing robust encryption without performance drawbacks",
-			"Building a secure yet user-friendly authentication flow",
-			"Managing modular functionality with multiple Django apps and models",
-			"Ensuring a responsive, dynamic UI across devices",
-		],
-		technologies: [
-			"Django",
-			"Python",
-			"HTML",
-			"JavaScript",
-			"Tailwind CSS",
-			"Fernet",
-		],
-		githubUrl: "https://github.com/Benedict-arowo/Password-Manager-App",
-		liveUrl: "https://youtu.be",
-		images: ["/placeholder.svg?height=600&width=800"],
-		stargazers_count: 0,
-		forks_count: 0,
-		language: "Python",
-		lastUpdated: "Not provided",
-	},
-	"crystal-wheels": {
-		name: "crystal-wheels",
-		emoji: "🚗",
-		title: "Crystal Wheels",
-		description: "A vehicle rental system with real-time availability.",
-		longDescription:
-			"Crystal Wheels is an intuitive vehicle rental platform that enables users to book and manage vehicles seamlessly. With real-time availability tracking and secure payment integration, it ensures a smooth rental experience.",
-		features: [
-			"Real-time vehicle availability tracking",
-			"Secure booking and payment system",
-			"User reviews and ratings for rentals",
-			"Admin dashboard for vehicle management",
-			"Responsive and modern UI",
-		],
-		challenges: [
-			"Developing a robust real-time tracking system",
-			"Handling large-scale booking requests efficiently",
-			"Ensuring a seamless and secure payment process",
-			"Building a scalable architecture for future expansion",
-		],
-		technologies: [
-			"Next.js",
-			"TypeScript",
-			"PostgreSQL",
-			"Stripe",
-			"Tailwind",
-		],
-		githubUrl: "https://github.com/benedictarowo/crystal-wheels",
-		liveUrl: null,
-		images: ["/placeholder.svg?height=600&width=800"],
-		stargazers_count: 47,
-		forks_count: 14,
-		language: "TypeScript",
-		lastUpdated: "2024-02-18",
-	},
-	marketplace: {
-		name: "marketplace",
-		emoji: "🛍️",
-		title: "Marketplace",
-		description: "A feature-rich student marketplace with amazing UI.",
-		longDescription:
-			"A student-focused marketplace platform designed for the university community, enabling sellers to onboard via a subscription fee, list products with detailed descriptions and multiple images, and create customizable storefronts with unique URLs. Built with NextJS on the client-side for a dynamic and responsive experience and ExpressJS on the backend for robust API handling, this platform streamlines product search, real-time messaging between buyers and sellers, and secure transactions.",
-		features: [
-			"Seller onboarding with subscription-based access",
-			"Product listings with detailed descriptions and multiple images",
-			"Real-time messaging between buyers and sellers",
-			"Advanced search and filtering options",
-			"Customizable storefronts with unique URLs for targeted advertising",
-		],
-		challenges: [
-			"Developing a responsive and engaging UI with NextJS",
-			"Optimizing search functionality for fast and accurate results",
-			"Implementing a secure and reliable real-time messaging system",
-			"Integrating subscription management and personalized storefront features",
-		],
-		technologies: [
-			"NextJS",
-			"ExpressJS",
-			"NodeJS",
-			"Context API",
-			"ShadCN",
-			"Prisma",
-			"Postgres",
-			"Cloudinary",
-			"Web Socket",
-			"Typescript",
-		],
-		githubUrl: "https://github.com/benedictarowo/marketplace-remake",
-		liveUrl: null,
-		images: ["/placeholder.svg?height=600&width=800"],
-		stargazers_count: 54,
-		forks_count: 17,
-		language: "JavaScript",
-		lastUpdated: "2024-03-10",
-	},
-	"student-test-recovery": {
-		name: "student-test-recovery",
-		emoji: "📜",
-		title: "Student Test Recovery System",
-		description:
-			"Flask-based solution that matches student phone numbers to identities, saving 800+ students from retaking a test.",
-		longDescription:
-			"Developed in response to a critical university testing error where student names were omitted from the Google Forms submissions, this Flask web application empowers administrators to upload two Excel files—one containing attendance records (with student names, phone numbers, and departments) and another with test scores linked to phone numbers. Using Python and OpenPyXL, the system automates the matching process by normalizing phone number formats, accurately linking test scores to the correct students, and generating a comprehensive Excel report that highlights both matched results and unmatched records. This solution spared over 800 students from the burden of retaking their tests while streamlining the administrative recovery process.",
-		features: [
-			"Flask-based web interface for secure file uploads",
-			"Excel file processing and data extraction using OpenPyXL",
-			"Automated matching of student records via normalized phone numbers",
-			"Generation of detailed Excel reports with matched scores and unmatched entries",
-			"User-friendly design tailored for quick and accurate recovery operations",
-		],
-		challenges: [
-			"Accurately matching records despite inconsistent phone number formats",
-			"Handling duplicate entries and data inconsistencies in Excel files",
-			"Optimizing processing speed for large datasets",
-			"Designing an intuitive UI for non-technical users under time constraints",
-		],
-		technologies: ["Python", "Flask", "OpenPyXL"],
-		githubUrl: "https://github.com/benedictarowo/student-test-recovery",
-		liveUrl: null,
-		images: ["/placeholder.svg?height=600&width=800"],
-		stargazers_count: 0,
-		forks_count: 0,
-		language: "Python",
-		lastUpdated: "2024-03-30",
-	},
-};
+import { ProjectDetails, projectsData } from "@/app/page";
 
 export default function ProjectPage() {
 	const params = useParams();
@@ -317,11 +22,9 @@ export default function ProjectPage() {
 	useEffect(() => {
 		const fetchProject = async () => {
 			setLoading(true);
-			// Simulate API call delay
-			await new Promise((resolve) => setTimeout(resolve, 1000));
 
 			// Get project data
-			const projectData = projectsData[slug];
+			const projectData = projectsData[slug.toLowerCase()];
 			if (projectData) {
 				setProject(projectData);
 			}
@@ -411,22 +114,22 @@ export default function ProjectPage() {
 					</div>
 
 					<div className="flex flex-wrap gap-3 mb-6">
-						<Badge
+						{/* <Badge
 							variant="outline"
 							className="flex items-center gap-1">
 							<span className="bg-primary/20 rounded-full p-0.5">
 								<Star className="h-3.5 w-3.5 text-primary" />
 							</span>
 							{project.stargazers_count} stars
-						</Badge>
-						<Badge
+						</Badge> */}
+						{/* <Badge
 							variant="outline"
 							className="flex items-center gap-1">
 							<span className="bg-primary/20 rounded-full p-0.5">
 								<GitFork className="h-3.5 w-3.5 text-primary" />
 							</span>
 							{project.forks_count} forks
-						</Badge>
+						</Badge> */}
 						<Badge variant="secondary">{project.language}</Badge>
 						<Badge variant="outline">
 							Last updated: {project.lastUpdated}
@@ -449,12 +152,13 @@ export default function ProjectPage() {
 									<Image
 										width={100}
 										height={100}
+										layout="responsive"
 										src={
 											project.images[activeImageIndex] ||
 											"/placeholder.svg"
 										}
 										alt={`${project.title} screenshot`}
-										className="w-full h-full object-cover"
+										className="w-full h-full object-cover object-top max-h-[600px]"
 									/>
 								</div>
 							</div>
@@ -482,7 +186,7 @@ export default function ProjectPage() {
 												alt={`${
 													project.title
 												} thumbnail ${index + 1}`}
-												className="h-full w-auto object-cover"
+												className="h-[100px] w-[100px] object-top object-cover"
 											/>
 										</button>
 									))}
@@ -585,17 +289,19 @@ export default function ProjectPage() {
 										Project Links
 									</h2>
 									<div className="space-y-4">
-										<Button
-											className="w-full justify-start"
-											asChild>
-											<a
-												href={project.githubUrl}
-												target="_blank"
-												rel="noopener noreferrer">
-												<Github className="mr-2 h-4 w-4" />
-												View on GitHub
-											</a>
-										</Button>
+										{project.githubUrl && (
+											<Button
+												className="w-full justify-start"
+												asChild>
+												<a
+													href={project.githubUrl}
+													target="_blank"
+													rel="noopener noreferrer">
+													<Github className="mr-2 h-4 w-4" />
+													View on GitHub
+												</a>
+											</Button>
+										)}
 
 										{project.liveUrl && (
 											<Button
