@@ -745,21 +745,21 @@ export const projectsData: Record<string, ProjectDetails> = {
 		emoji: "🔐",
 		title: "Blackpoint",
 		description:
-			"A robust security-focused system with advanced authentication and real-time monitoring.",
+			"A decentralized peer-to-peer (P2P) marketplace that enables users to trade currencies (both fiat and crypto), digital assets, and virtual goods directly with other traders without intermediaries.",
 		longDescription:
-			"Blackpoint is a high-security platform designed to enhance authentication, user management, and real-time security monitoring. The system includes multi-factor authentication, session tracking, and advanced encryption to ensure secure access and data protection. The frontend is built with React for a seamless user experience, while the backend leverages ExpressJS and MongoDB for scalable and efficient data management.",
+			"Blackpoint is a cutting-edge decentralized marketplace designed to empower individuals by enabling direct peer-to-peer trading of both fiat and crypto currencies, digital assets, and virtual goods. It leverages top-notch security features such as multi-factor authentication, encryption, and role-based access control, ensuring a safe trading environment. The platform is built using modern technologies including React for the frontend, while ExpressJS and MongoDB provide a robust and scalable backend.",
 		features: [
-			"Multi-factor authentication (MFA) for enhanced security",
-			"Role-based access control (RBAC) for user management",
-			"Real-time security alerts and logging",
-			"Session tracking and automatic logout for inactive users",
-			"Encrypted storage for sensitive user data",
+			"Multi-factor authentication (MFA) for secure user login",
+			"Role-based access control (RBAC) to manage user permissions",
+			"Real-time security alerts to prevent fraud and unauthorized access",
+			"Session tracking with automatic logout to enhance account protection",
+			"Encrypted storage to safeguard sensitive user information",
 		],
 		challenges: [
-			"Implementing a secure and user-friendly authentication process",
-			"Ensuring real-time logging and alerting without performance bottlenecks",
-			"Optimizing database security for sensitive user information",
-			"Balancing security and usability to prevent user friction",
+			"Developing a robust and user-friendly authentication system that is both secure and seamless",
+			"Ensuring the real-time functionality of the platform, especially for security logging and alerting, without affecting performance",
+			"Securing user data by implementing advanced database encryption techniques and maintaining data integrity",
+			"Balancing the need for strong security with usability to avoid frustrating users with overly complex processes",
 		],
 		technologies: [
 			"React",
