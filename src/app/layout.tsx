@@ -7,9 +7,9 @@ import type { Metadata } from "next";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "Benedict Arowo | Full-Stack Developer & Aspiring Electrical Engineer",
+	title: "Arowojolu-Alagwe Benedict | Full-Stack Developer & Aspiring Electrical Engineer",
 	description:
-		"Portfolio of Benedict Arowo, a Full-Stack Developer and Aspiring Electrical Engineer",
+		"Portfolio of Arowojolu-Alagwe Benedict, a Full-Stack Developer and Aspiring Electrical Engineer",
 };
 
 export default function RootLayout({
