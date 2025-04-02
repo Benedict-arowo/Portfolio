@@ -851,9 +851,9 @@ const services = [
 		icon: <Globe className="h-6 w-6 text-primary" />,
 	},
 	{
-		title: "Cyber & Cloud",
+		title: "Learning Rust",
 		description:
-			"Implementing secure, scalable cloud infrastructure with best practices for modern web applications.",
+			"Exploring Rust from the ground up to build efficient, memory-safe, and high-performance applications.",
 		icon: <Shield className="h-6 w-6 text-primary" />,
 	},
 	{
