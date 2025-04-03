@@ -209,7 +209,7 @@ const projectsData: Record<string, ProjectDetails> = {
 			"Scaling the application to handle a large number of requests",
 		],
 		technologies: [
-			"Next.js",
+			"React.js",
 			"Express.js",
 			"TypeScript",
 			"Prisma",
@@ -218,7 +218,7 @@ const projectsData: Record<string, ProjectDetails> = {
 		],
 		githubUrl:
 			"https://github.com/Benedict-arowo/Scissor---Capstone-Project",
-		liveUrl: "https://scissor-capstone-project-five.vercel.app",
+		liveUrl: null,
 		images: [
 			"https://res.cloudinary.com/dctbkswpr/image/upload/v1743480157/portfolio/scissor/uv7xn6vsq9ouwv8kx7vg.png",
 			"https://res.cloudinary.com/dctbkswpr/image/upload/v1743480157/portfolio/scissor/cmmpqkhfifa7ija0raa0.png",
