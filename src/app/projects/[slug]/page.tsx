@@ -325,7 +325,7 @@ const projectsData: Record<string, ProjectDetails> = {
 		work_experience: true,
 	},
 	"university-result-checker": {
-		name: "resultchecker",
+		name: "university-result-checker",
 		emoji: "📊",
 		title: "University Result Checker",
 		description:
