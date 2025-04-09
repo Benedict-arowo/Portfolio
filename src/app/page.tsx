@@ -99,7 +99,7 @@ const projectsData: Record<string, ProjectDetails> = {
 			"Next.js",
 			"TypeScript",
 			"PostgreSQL",
-			"Stripe",
+			"Paystack",
 			"Tailwind",
 		],
 		githubUrl: null,
